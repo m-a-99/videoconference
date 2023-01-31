@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+        integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+        crossorigin="anonymous"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="/client.js" defer></script>
+
+    <link rel="shortcut icon" href="#">
+    <title>Document</title>
+
+
+</head>
+<style>
+    video {
+        height: 400px;
+
+    }
+
+    .flip {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+        /* Safari and Chrome */
+        -moz-transform: rotateY(180deg);
+    }
+
+    #remoteStreams {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #d1dad3;
+        /* display: flex; */
+        /* justify-content: flex-end;
+    align-items: center; */
+        font-size: 17px;
+    }
+
+    .container {
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .switch-holder {
+        margin: 10px;
+        display: flex;
+        padding: 10px 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: -8px -8px 15px rgba(255, 255, 255, .7),
+            10px 10px 10px rgba(0, 0, 0, .3),
+            inset 8px 8px 15px rgba(255, 255, 255, .7),
+            inset 10px 10px 10px rgba(0, 0, 0, .3);
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .switch-label {
+        width: 150px;
+    }
+
+    .switch-label i {
+        margin-right: 5px;
+    }
+
+    .switch-toggle {
+        height: 40px;
+    }
+
+    .switch-toggle input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        z-index: -2;
+    }
+
+    .switch-toggle input[type="checkbox"]+label {
+        position: relative;
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 0;
+        cursor: pointer;
+        box-shadow: inset -8px -8px 15px rgba(255, 255, 255, .6),
+            inset 10px 10px 10px rgba(0, 0, 0, .25);
+
+    }
+
+    .switch-toggle input[type="checkbox"]+label::before {
+        position: absolute;
+        content: 'OFF';
+        font-size: 13px;
+        text-align: center;
+        line-height: 25px;
+        top: 8px;
+        left: 8px;
+        width: 45px;
+        height: 25px;
+        border-radius: 20px;
+        background-color: #d1dad3;
+        box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
+            3px 3px 5px rgba(0, 0, 0, .25);
+        transition: .3s ease-in-out;
+    }
+
+    .switch-toggle input[type="checkbox"]:checked+label::before {
+        left: 50%;
+        content: 'ON';
+        color: #fff;
+        background-color: #00b33c;
+        box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
+            3px 3px 5px #00b33c;
+    }
+</style>
+
+<body>
+
+    <div id="remoteStreams"></div>
+    <div id="buttons">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <div class="container">
+
+            <div class="switch-holder">
+                <div class="switch-label">
+                    <i class="fa fa-camera "></i><span>webcam</span>
+                </div>
+                <div class="switch-toggle">
+                    <input onchange="toggle_webcam()" type="checkbox" id="webcam" checked>
+                    <label for="webcam"></label>
+                </div>
+            </div>
+
+            <div class="switch-holder">
+                <div class="switch-label">
+                    <i class="fa fa-microphone"></i><span>mic</span>
+                </div>
+                <div class="switch-toggle">
+                    <input onchange="toggle_mic()" type="checkbox" id="mic" checked>
+                    <label for="mic"></label>
+                </div>
+            </div>
+
+            <div class="switch-holder">
+                <div class="switch-label">
+                    <i class="fa fa-share-square "></i></i><span>share screen</span>
+                </div>
+                <div class="switch-toggle">
+                    <input onchange="toggle_screenshare()" type="checkbox" id="sharescreen">
+                    <label for="sharescreen"></label>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div onclick="join(this)" class="switch-holder">
+                join
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
