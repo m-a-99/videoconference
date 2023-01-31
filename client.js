@@ -56,12 +56,12 @@ let webcam_streams = {}
 async function create_webcam_wrtc_Connection(id) {
     var ICE_config = {
         'iceServers': [
-            {
-                'urls': 'stun:localhost:3478'
-            }
             // {
-            //     'urls': 'stun:stun1.l.google.com:19302'
-            // },
+            //     'urls': 'stun:localhost:3478'
+            // }
+            {
+                'urls': 'stun:stun1.l.google.com:19302'
+            },
             // {
             //     'urls': 'stun:vcall.co.vu:3478',             
             //     'username': 'root',
